@@ -1,7 +1,5 @@
-
 #pragma once
 
-#include <vector>
 #include <string>
 
 #if __GNUC__ >= 8
@@ -18,9 +16,9 @@ extern const bool notWriteToFile;
 extern FILE* LOG_FILE;
 extern const int LOG_SIZE;
 
-extern void initLogger(string taskPath, string objectName);
+extern void initLogger(string logPath, string objectName);
 extern void doLog(const char* log, bool writeToFile = true);
 extern void deinitLog();
 extern void getNowDt(string &str);
-extern int parseStringDt(string str, tm &dt);
 extern string ReplaceAll(string str, const string& from, const string& to);
+uint16_t Calculate_CRC_CCITT(const uint8_t *buffer, int len);

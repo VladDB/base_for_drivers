@@ -39,16 +39,6 @@ using namespace std;
 // #define socket_protocol     IPPROTO_IP
 #endif
 
-// #ifndef DWORD
-// #define DWORD uint32_t
-// #endif
-// #ifndef WORD
-// #define WORD uint16_t
-// #endif
-// #ifndef BYTE
-// #define BYTE uint8_t
-// #endif
-
 struct TSettings
 {
     string ip;
@@ -73,7 +63,6 @@ public:
 
     Driver(TSettings settings) : m_settings(settings) {};
     virtual ~Driver();
-    // bool readObjectData();
     bool initLink();
     int sendData(uint8_t *data, int len, uint8_t *respBuff, int *respSize);
     void startTask();
