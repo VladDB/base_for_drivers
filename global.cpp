@@ -4,7 +4,7 @@ const bool notWriteToFile = false;
 FILE *LOG_FILE;
 const int LOG_SIZE = 1000000;
 
-void initLogger(string logPath, string objectName)
+void initLogger(string logPath, const string &objectName)
 {
     logPath.append(objectName + ".log");
 

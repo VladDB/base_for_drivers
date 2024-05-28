@@ -25,7 +25,7 @@ using namespace std;
 #ifdef __linux__
 // socket
 #define socket_type int
-#define nfds(_client) (_client + 1)
+#define nfds(_client) ((_client) + (1))
 #define close_socket close
 #define socket_res_err (-1)
 // #define socket_protocol     IPPROTO_UDP
@@ -41,24 +41,23 @@ using namespace std;
 
 struct TSettings
 {
-    string ip;
-    int port;
-    int timeoutMs;
+    string ip{""};
+    int port{0};
+    int timeoutMs{1000};
 };
 
 class Driver
 {
 private:
-    socket_type sock = 0;
+    socket_type sock{0};
     TSettings m_settings;
 
     bool initSocket();
     int sendDataByTCP(uint8_t *data, int len, uint8_t *respBuff, int *respSize);
 
 public:
-    uint8_t Offset;
-    uint8_t RecvBuf[RecvBufSize];
-    TSettings settings;
+    uint8_t Offset{0};
+    uint8_t RecvBuf[RecvBufSize]{};
     bool useDeviceSystemTimeout = false;
 
     Driver(TSettings settings) : m_settings(settings) {};

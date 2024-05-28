@@ -34,7 +34,7 @@ bool Driver::initSocket()
     struct sockaddr_in addr;
     this->sock = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (this->sock < 0)
+    if (this->sock == socket_res_err)
     {
         sprintf(log, "Error create socket");
         doLog(log);
@@ -102,7 +102,7 @@ int Driver::sendDataByTCP(uint8_t *data, int len, uint8_t *respBuff, int *respSi
     }
 
     // Получение
-    int res, MaxChr;
+    int res{0}, MaxChr{0};
     fd_set ListenSockets;
     struct timeval time_wait;
     time_wait.tv_sec = m_settings.timeoutMs / 1000;
@@ -117,7 +117,7 @@ int Driver::sendDataByTCP(uint8_t *data, int len, uint8_t *respBuff, int *respSi
     time_t startTime = time(0);
     if (useDeviceSystemTimeout)
     {
-        while ((time(0) - startTime) < (this->settings.timeoutMs / 1000))
+        while ((time(0) - startTime) < (this->m_settings.timeoutMs / 1000))
         {
             FD_ZERO(&ListenSockets);
             FD_SET(this->sock, &ListenSockets);
